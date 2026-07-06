@@ -9,18 +9,17 @@ import { scoutagent } from "./agents/scoutAgent.js"
 import { cleanAgent } from "./agents/cleanAgent.js"
 import { categorize } from "./agents/categorize.js"
 import { publisherAgent } from "./agents/publisherAgent.js"
-
+import { hallucinationAgent } from "./agents/hallucination.js"
+import { graphapp } from "./pipeline/graph.js"
 
 dotenv.config()
 
+
+
 const run = async () => {
   console.log("Pipeline started...")
-  const raw = await scoutagent()
-  const cleaned = await cleanAgent(raw)
-  const categorized = await categorize(cleaned)
-  await publisherAgent(categorized)
-  const embedded = await embeddingAgent(categorized)
-  console.log(embedded)
+  await graphapp.invoke({})
+  console.log("Pipeline complete!")
 }
 
 run()
@@ -34,8 +33,9 @@ cron.schedule("0 */6 * * *", async () => {
   const raw = await scoutagent()
   const cleaned = await cleanAgent(raw)
   const categorized = await categorize(cleaned)
-  await publisherAgent(categorized)
-  const embedded = await embeddingAgent(categorized)
+  const verified = await hallucinationAgent(categorized)
+  await publisherAgent(verified)
+  const embedded = await embeddingAgent(verified)
 console.log(embedded)
   console.log("Pipeline complete!")
 })

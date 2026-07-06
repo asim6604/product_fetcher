@@ -11,7 +11,7 @@ const tavilyTool=tavily({
 const scoutagent= async()=>{
     console.log("Scout Agent started — searching for AI news...");
 
-  const response = await tavilyTool.search("clothing");
+  const response = await tavilyTool.search("men women shirt kurta shalwar kameez pants buy online product price");
 
   console.log("Scout Agent found articles:", response);
 
