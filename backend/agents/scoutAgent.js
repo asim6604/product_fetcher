@@ -9,11 +9,11 @@ const tavilyTool=tavily({
   apiKey: process.env.TAVILY_API_KEY,
 })
 const scoutagent= async()=>{
-    console.log("Scout Agent started — searching for AI news...");
+   
 
   const response = await tavilyTool.search("men women shirt kurta shalwar kameez pants buy online product price");
 
-  console.log("Scout Agent found articles:", response);
+
 
  const products=response.results.map(product=>({
      title: product.title,

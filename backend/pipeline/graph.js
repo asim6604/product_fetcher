@@ -56,8 +56,8 @@ workflow.addEdge("categorizer", "hallucination")
 const shouldRetry=(state)=>{
     const bad=state.verified.filter(p=> p.category==="other")
      if (bad.length > 3 & !state.retried) {
-    console.log("Too many bad categories — retrying categorizer")
-     console.log("Bad products count:", bad.length)
+   
+     
     return "categorizer"
   }
   return "publisher"
